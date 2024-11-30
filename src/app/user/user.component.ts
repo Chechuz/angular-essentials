@@ -1,5 +1,16 @@
 import { Component, computed, EventEmitter, Input, input, Output, output } from '@angular/core';
 
+type User = {  
+  id: string;
+  avatar: string;
+  name: string;
+}
+  // interface User {
+  //   id: string;
+  //   avatar: string;
+  //   name: string;
+  // }
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -8,22 +19,15 @@ import { Component, computed, EventEmitter, Input, input, Output, output } from 
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  @Input({required:true}) id!:string;
-  @Input({required:true}) avatar!: string;  //el signo "!" se pone porque el string no esta inicializado
-  @Input({required:true}) name!: string;
+  @Input({required:true}) user!: User;
+  
   @Output() select = new EventEmitter<string>();
-  //select = output<string>();  // NO es una signal !!
-  //avatar = input.required<string>();  //son signals
-  //name = input.required<string>();
-
-  //imagePath = computed(()=>{   //signal
-  //  return '../assets/users/' + this.avatar;
-  // });
+ 
   get imagePath(){
-    return '../assets/users/' + this.avatar;
+    return '../assets/users/' + this.user.avatar;
   }
 
   onSelectUser(id:string){
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
    }
 }
