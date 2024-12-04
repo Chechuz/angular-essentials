@@ -13,20 +13,15 @@ import { TasksService } from './tasks.service';
 })
 export class TasksComponent {
   @Input({required :true}) userId!: string;
-  @Input({required :true}) name!: string;   //otra alternativa
+  @Input({required :true}) name!: string;  
+
   isAddingTask= false;
- // private tasksService: TasksService;
+
   
-  constructor(private tasksService: TasksService){
-  //  this.tasksService = tasksService;
-  }
+  constructor(private tasksService: TasksService){  }
 
  get selectedUserTasks(){
   return this.tasksService.getUserTasks(this.userId);
- }
-
- onCompleteTask(id:string){
-  
  }
 
  onStartAddTask(){
